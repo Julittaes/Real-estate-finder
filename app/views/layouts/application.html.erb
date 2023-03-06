@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PropertyFinder</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  </head>
+
+<body id="<%= controller.controller_name %>" class="<%= controller.action_name %> <%= "show-sidebar" if @show_sidebar.present? %>">
+  <% if @show_sidebar.nil? %>
+  <header>
+    <%= render "layouts/nav/public" %>
+  </header>
+  <%= yield %>
+  <% else %>
+  <%= render "layouts/nav/dashboard" %>
+  <div class="container-fluid" bis_skin_checked="1">
+    <div class="row" bis_skin_checked="1">
+      <%= render "layouts/nav/sidebar" %>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4 mt-3">
+        <%= yield %>
+      </main>
+    </div>
+  </div>
+  <% end %>
+  <%= render "layouts/nav/footer" %>
+
+  <%# <div id="notifications"><%= flash_notifications</div> %> %>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+  <script>
+    feather.replace()
+  </script>
+</body>
+</html>
